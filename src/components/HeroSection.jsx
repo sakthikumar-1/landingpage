@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '../context/ThemeContext';
+import { CrownInsignia } from './CrownInsignia';
 import { MagneticButton } from './MagneticButton';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -11,11 +12,8 @@ const HeroScene3D = lazy(() => import('./HeroScene3D'));
 
 const EASE_CINEMATIC = [0.22, 1, 0.36, 1];
 const BRAND_WORDS = ['SAKTHI', 'KUMAR.'];
-const MANIFESTO_BEATS = [
-  'A new chapter.',
-  'A clearer vision.',
-  'A bigger ambition.',
-];
+const ANNOUNCEMENT_WORDS = ['SOMETHING', 'GREATER', 'IS', 'COMING.'];
+const TAGLINE_PHRASES = ['Beyond What Exists.', "Built for What's Next."];
 
 /**
  * Section 01 (Overview): Full-screen 3D WebGL stage with split-character kinetic
@@ -131,6 +129,22 @@ export function HeroSection({
         className="relative z-20 my-auto flex w-full max-w-[94vw] flex-col items-center text-center"
         style={isInteractive ? { x: heroX, y: heroY } : undefined}
       >
+        <CrownInsignia isReady={isReady} />
+
+        {/* Eyebrow */}
+        <div className="mb-2.5 overflow-hidden sm:mb-3">
+          <motion.p
+            className="font-mono text-[10px] font-medium uppercase tracking-[0.34em] text-[var(--text-muted)] sm:text-[11px] sm:tracking-[0.42em]"
+            initial={prefersReducedMotion ? false : { y: '110%', opacity: 0 }}
+            animate={
+              isReady ? { y: '0%', opacity: 1 } : { y: '110%', opacity: 0 }
+            }
+            transition={revealTransition(0.72, 0.72)}
+          >
+            A NEW ERA IS TAKING SHAPE
+          </motion.p>
+        </div>
+
         <h1
           aria-label="SAKTHI KUMAR."
           className="font-display flex flex-col items-center justify-center gap-y-0.5 py-2 text-[clamp(2.1rem,10.6vw,3.5rem)] font-extrabold uppercase leading-[0.94] tracking-[-0.025em] sm:flex-row sm:gap-x-[0.25em] sm:text-[clamp(2.2rem,5.9vw,5.8rem)]"
@@ -161,7 +175,7 @@ export function HeroSection({
                           ? { y: '0%', opacity: 1, filter: 'blur(0px)' }
                           : { y: '115%', opacity: 0, filter: 'blur(8px)' }
                       }
-                      transition={revealTransition(0.16 + index * 0.028, 0.88)}
+                      transition={revealTransition(0.88 + index * 0.028, 0.88)}
                     >
                       {char}
                     </motion.span>
@@ -174,36 +188,52 @@ export function HeroSection({
 
         <div ref={sublockRef} className="flex flex-col items-center">
           {/* Kinetic gold horizon separator */}
-          <div className="relative my-5 flex w-48 items-center sm:my-7 sm:w-80">
+          <div className="relative my-5 flex w-48 items-center sm:my-6 sm:w-80">
             <motion.div
               className="relative h-px w-full origin-center overflow-hidden bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent"
               initial={prefersReducedMotion ? false : { scaleX: 0, opacity: 0 }}
               animate={
                 isReady ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }
               }
-              transition={revealTransition(0.6, 0.9)}
+              transition={revealTransition(1.34, 0.88)}
             >
               <span className="animate-horizon-pulse absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-[var(--accent-strong)] to-transparent" />
             </motion.div>
           </div>
 
-          {/* Dramatic announcement */}
-          <div className="overflow-hidden">
-            <motion.p
-              className="font-sans text-xs font-semibold uppercase tracking-[0.22em] text-[var(--accent-strong)] sm:text-sm sm:tracking-[0.34em]"
-              initial={prefersReducedMotion ? false : { y: '105%', opacity: 0 }}
-              animate={
-                isReady ? { y: '0%', opacity: 1 } : { y: '105%', opacity: 0 }
-              }
-              transition={revealTransition(0.78, 0.85)}
-            >
-              THE KING&apos;S ENTRY IS COMING SOON.
-            </motion.p>
-          </div>
+          {/* Primary announcement */}
+          <h2
+            aria-label="SOMETHING GREATER IS COMING."
+            className="flex flex-wrap items-center justify-center gap-x-[0.42em] gap-y-1 font-sans text-xs font-semibold uppercase tracking-[0.22em] text-[var(--accent-strong)] sm:text-sm sm:tracking-[0.34em]"
+          >
+            {ANNOUNCEMENT_WORDS.map((word, index) => (
+              <span key={word} className="inline-block overflow-hidden py-0.5">
+                <motion.span
+                  aria-hidden="true"
+                  className={`inline-block ${
+                    word === 'GREATER' ? 'text-[var(--accent)] drop-shadow-[0_0_12px_var(--accent-soft)]' : ''
+                  }`}
+                  initial={
+                    prefersReducedMotion
+                      ? false
+                      : { y: '110%', opacity: 0, filter: 'blur(4px)' }
+                  }
+                  animate={
+                    isReady
+                      ? { y: '0%', opacity: 1, filter: 'blur(0px)' }
+                      : { y: '110%', opacity: 0, filter: 'blur(4px)' }
+                  }
+                  transition={revealTransition(1.46 + index * 0.09, 0.78)}
+                >
+                  {word}
+                </motion.span>
+              </span>
+            ))}
+          </h2>
 
-          {/* Supporting text */}
+          {/* Personal tagline */}
           <p className="mt-3.5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-sans text-sm font-normal tracking-[0.02em] text-[var(--text-secondary)] sm:mt-4 sm:text-base">
-            {MANIFESTO_BEATS.map((phrase, index) => (
+            {TAGLINE_PHRASES.map((phrase, index) => (
               <span key={phrase} className="inline-block overflow-hidden">
                 <motion.span
                   className="inline-block"
@@ -215,7 +245,7 @@ export function HeroSection({
                       ? { y: '0%', opacity: 1 }
                       : { y: '110%', opacity: 0 }
                   }
-                  transition={revealTransition(0.98 + index * 0.2, 0.78)}
+                  transition={revealTransition(1.85 + index * 0.18, 0.78)}
                 >
                   {phrase}
                 </motion.span>
@@ -230,7 +260,7 @@ export function HeroSection({
         className="relative z-20"
         initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
         animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-        transition={revealTransition(1.35, 0.8)}
+        transition={revealTransition(2.1, 0.8)}
       >
         <MagneticButton
           type="button"
