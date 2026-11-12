@@ -26,7 +26,7 @@ export function FooterBar({ onNavigate }) {
             {SITE_META.domain}
           </a>
           <p className="font-sans text-xs tracking-[0.06em] text-[var(--text-muted)]">
-            &copy; {currentYear} Sakthi Kumar. All rights reserved.
+            &copy; {currentYear} Sakthi Kumar (Sakthi Kumar B). All rights reserved.
           </p>
         </div>
 

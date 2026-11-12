@@ -23,7 +23,7 @@ const DIRECT_CHANNELS = [
     label: 'LinkedIn',
     display: '/in/sakthikumar1',
     href: CONTACT_DETAILS.linkedinUrl,
-    ariaLabel: 'Open Sakthi Kumar LinkedIn profile in a new tab',
+    ariaLabel: 'Open Sakthi Kumar (Sakthi Kumar B) LinkedIn profile in a new tab',
     external: true,
     icon: null,
   },
@@ -32,7 +32,7 @@ const DIRECT_CHANNELS = [
     label: 'GitHub',
     display: '@sakthikumar-1',
     href: CONTACT_DETAILS.githubUrl,
-    ariaLabel: 'Open Sakthi Kumar GitHub profile in a new tab',
+    ariaLabel: 'Open Sakthi Kumar (Sakthi Kumar B) GitHub profile in a new tab',
     external: true,
     icon: null,
   },
@@ -202,7 +202,7 @@ export function ContactSection() {
                 key={channel.key}
                 href={channel.href}
                 target={channel.external ? '_blank' : undefined}
-                rel={channel.external ? 'noopener noreferrer' : undefined}
+                rel={channel.external ? 'noopener noreferrer me' : undefined}
                 aria-label={channel.ariaLabel}
                 data-contact-reveal
                 onPointerMove={handleTilePointerMove}

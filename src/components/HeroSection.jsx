@@ -149,6 +149,7 @@ export function HeroSection({
           aria-label="SAKTHI KUMAR."
           className="font-display flex flex-col items-center justify-center gap-y-0.5 py-2 text-[clamp(2.1rem,10.6vw,3.5rem)] font-extrabold uppercase leading-[0.94] tracking-[-0.025em] sm:flex-row sm:gap-x-[0.25em] sm:text-[clamp(2.2rem,5.9vw,5.8rem)]"
         >
+          <span className="sr-only">Sakthi Kumar.</span>
           {BRAND_WORDS.map((word, wordIdx) => (
             <span
               key={word}
@@ -206,6 +207,7 @@ export function HeroSection({
             aria-label="SOMETHING GREATER IS COMING."
             className="flex flex-wrap items-center justify-center gap-x-[0.42em] gap-y-1 font-sans text-xs font-semibold uppercase tracking-[0.22em] text-[var(--accent-strong)] sm:text-sm sm:tracking-[0.34em]"
           >
+            <span className="sr-only">Something Greater Is Coming.</span>
             {ANNOUNCEMENT_WORDS.map((word, index) => (
               <span key={word} className="inline-block overflow-hidden py-0.5">
                 <motion.span
