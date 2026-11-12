@@ -1,16 +1,33 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en" data-theme="dark" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sakthi Kumar | Coming Soon</title>
     <meta
       name="description"
-      content="A new chapter is coming. Welcome to the official website of Sakthi Kumar."
+      content="A new chapter. A clearer vision. A bigger ambition. Welcome to the official personal identity website of Sakthi Kumar."
     />
     <meta name="theme-color" content="#050505" />
     <meta name="author" content="Sakthi Kumar" />
     <link rel="canonical" href="https://sakthikumar.com/" />
+
+    <!-- Prevent theme flash before React mounts -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('sakthi-theme');
+          var theme =
+            saved === 'light' || saved === 'dark'
+              ? saved
+              : window.matchMedia('(prefers-color-scheme: light)').matches
+                ? 'light'
+                : 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+          document.documentElement.classList.toggle('dark', theme === 'dark');
+        } catch (e) {}
+      })();
+    </script>
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -18,7 +35,7 @@
     <meta property="og:title" content="Sakthi Kumar | Coming Soon" />
     <meta
       property="og:description"
-      content="A new chapter is coming. Welcome to the official website of Sakthi Kumar."
+      content="A new chapter. A clearer vision. A bigger ambition. Welcome to the official website of Sakthi Kumar."
     />
 
     <!-- Twitter -->
@@ -26,7 +43,7 @@
     <meta name="twitter:title" content="Sakthi Kumar | Coming Soon" />
     <meta
       name="twitter:description"
-      content="A new chapter is coming. Welcome to the official website of Sakthi Kumar."
+      content="A new chapter. A clearer vision. A bigger ambition. Welcome to the official website of Sakthi Kumar."
     />
 
     <!-- Favicon -->
@@ -40,7 +57,7 @@
       rel="stylesheet"
     />
   </head>
-  <body class="bg-[#050505] text-[#F5F2EB] antialiased selection:bg-[#D5B474]/25 selection:text-[#EFE0BC]">
+  <body class="antialiased">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

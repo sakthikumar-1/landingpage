@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { motion, useSpring } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 
 /**
- * Custom desktop cursor (precision core dot + trailing champagne ring)
- * paired with a soft cursor-following volumetric spotlight.
+ * Custom desktop cursor (precision core dot + trailing ring)
+ * paired with a theme-adapted cursor-following spotlight.
  */
 export function CustomCursor({ isInteractive, mouseX, mouseY, glowX, glowY }) {
+  const { isDark } = useTheme();
   const [isHoveringInteractive, setIsHoveringInteractive] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -57,7 +59,7 @@ export function CustomCursor({ isInteractive, mouseX, mouseY, glowX, glowY }) {
 
   return (
     <>
-      {/* Ambient cursor-following champagne spotlight */}
+      {/* Cursor-following atmospheric spotlight */}
       <motion.div
         aria-hidden="true"
         className="pointer-events-none fixed left-0 top-0 z-10 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full will-change-transform"
@@ -65,15 +67,16 @@ export function CustomCursor({ isInteractive, mouseX, mouseY, glowX, glowY }) {
           x: glowX,
           y: glowY,
           opacity: isVisible ? 1 : 0,
-          background:
-            'radial-gradient(circle, rgba(239, 224, 188, 0.075) 0%, rgba(213, 180, 116, 0.025) 36%, transparent 70%)',
+          background: isDark
+            ? 'radial-gradient(circle, rgba(239, 224, 188, 0.075) 0%, rgba(213, 180, 116, 0.025) 36%, transparent 70%)'
+            : 'radial-gradient(circle, rgba(140, 107, 47, 0.085) 0%, rgba(140, 107, 47, 0.025) 38%, transparent 70%)',
         }}
       />
 
       {/* Trailing outer ring */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none fixed left-0 top-0 z-[70] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#D5B474]/60 will-change-transform"
+        className="pointer-events-none fixed left-0 top-0 z-[70] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--accent)]/65 will-change-transform"
         style={{
           x: ringX,
           y: ringY,
@@ -81,7 +84,7 @@ export function CustomCursor({ isInteractive, mouseX, mouseY, glowX, glowY }) {
           height: 34,
           opacity: isVisible ? 1 : 0,
           backgroundColor: isHoveringInteractive
-            ? 'rgba(213, 180, 116, 0.09)'
+            ? 'var(--accent-soft)'
             : 'transparent',
         }}
         animate={{ scale: ringScale }}
@@ -91,7 +94,7 @@ export function CustomCursor({ isInteractive, mouseX, mouseY, glowX, glowY }) {
       {/* Precision center dot */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none fixed left-0 top-0 z-[71] h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#EFE0BC] will-change-transform"
+        className="pointer-events-none fixed left-0 top-0 z-[71] h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--accent-strong)] will-change-transform"
         style={{
           x: mouseX,
           y: mouseY,
@@ -101,4 +104,3 @@ export function CustomCursor({ isInteractive, mouseX, mouseY, glowX, glowY }) {
     </>
   );
 }
-

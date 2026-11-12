@@ -5,7 +5,7 @@ const EASE_CURTAIN = [0.76, 0, 0.24, 1];
 const EASE_CINEMATIC = [0.22, 1, 0.36, 1];
 
 /**
- * Animated preloader sequence: 000%->100% telemetry counter,
+ * Theme-aware preloader sequence: 000%->100% telemetry counter,
  * horizon charge filament, and split-aperture curtain reveal.
  */
 export function Preloader({ isVisible, onComplete }) {
@@ -60,7 +60,7 @@ export function Preloader({ isVisible, onComplete }) {
         >
           {/* Upper shutter */}
           <motion.div
-            className="absolute inset-x-0 top-0 h-1/2 border-b border-[#D5B474]/15 bg-[#050505]"
+            className="absolute inset-x-0 top-0 h-1/2 border-b border-[var(--border-accent)] bg-[var(--bg-primary)]"
             initial={{ y: '0%' }}
             exit={{
               y: '-100%',
@@ -70,7 +70,7 @@ export function Preloader({ isVisible, onComplete }) {
 
           {/* Lower shutter */}
           <motion.div
-            className="absolute inset-x-0 bottom-0 h-1/2 border-t border-[#D5B474]/15 bg-[#050505]"
+            className="absolute inset-x-0 bottom-0 h-1/2 border-t border-[var(--border-accent)] bg-[var(--bg-primary)]"
             initial={{ y: '0%' }}
             exit={{
               y: '100%',
@@ -78,11 +78,11 @@ export function Preloader({ isVisible, onComplete }) {
             }}
           />
 
-          {/* Center seam energy flash */}
+          {/* Center seam flash */}
           <motion.div
-            className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-[#EFE0BC] to-transparent"
+            className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent"
             initial={{ scaleX: 0, opacity: 0 }}
-            animate={{ scaleX: 0.28, opacity: 0.4 }}
+            animate={{ scaleX: 0.28, opacity: 0.45 }}
             exit={{
               scaleX: 1.15,
               opacity: 0,
@@ -103,21 +103,21 @@ export function Preloader({ isVisible, onComplete }) {
             }}
             transition={{ duration: 0.35 }}
           >
-            <div className="flex items-baseline justify-between font-mono text-[10px] uppercase tracking-[0.24em] text-[#969085]">
+            <div className="flex items-baseline justify-between font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--text-secondary)]">
               <span>sakthikumar.com</span>
-              <span className="text-xs tabular-nums text-[#D5B474]">
+              <span className="text-xs tabular-nums text-[var(--accent)]">
                 {formattedProgress}%
               </span>
             </div>
 
-            <div className="relative h-px w-full overflow-hidden bg-white/10">
+            <div className="relative h-px w-full overflow-hidden bg-[var(--border-subtle)]">
               <div
-                className="h-full origin-left bg-gradient-to-r from-[#D5B474]/40 via-[#EFE0BC] to-[#D5B474] transition-transform duration-75"
+                className="h-full origin-left bg-gradient-to-r from-[var(--accent)]/50 via-[var(--accent-strong)] to-[var(--accent)] transition-transform duration-75"
                 style={{ transform: `scaleX(${progress / 100})` }}
               />
             </div>
 
-            <div className="flex items-center justify-between font-mono text-[9px] uppercase tracking-[0.26em] text-[#6E6961]">
+            <div className="flex items-center justify-between font-mono text-[9px] uppercase tracking-[0.26em] text-[var(--text-muted)]">
               <span>Preparing Entry</span>
               <span>ED. 2026</span>
             </div>
