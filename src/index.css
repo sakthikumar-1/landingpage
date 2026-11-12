@@ -6,74 +6,65 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
   --color-void: #050505;
-  --color-obsidian: #0b0b0c;
-  --color-pearl: #f5f2eb;
-  --color-stone: #8f8a80;
+  --color-charcoal: #0c0c0e;
+  --color-ivory: #f5f0e6;
+  --color-stone: #969085;
   --color-champagne: #d5b474;
   --color-champagne-light: #efe0bc;
 }
 
 @layer base {
-  html,
+  html {
+    background-color: #050505;
+    color: #f5f0e6;
+    font-family: var(--font-sans);
+    scroll-behavior: auto;
+  }
+
   body {
     background-color: #050505;
-    color: #f5f2eb;
-    font-family: var(--font-sans);
+    color: #f5f0e6;
     overflow-x: hidden;
   }
-}
 
-/* Slow orbital eclipse ring rotation */
-@keyframes orbit-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+  body.has-custom-cursor,
+  body.has-custom-cursor a,
+  body.has-custom-cursor button {
+    cursor: none !important;
   }
 }
 
-@keyframes orbit-reverse {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
+/* Custom sleek dark scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-/* Subtle atmospheric light drift */
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(213, 180, 116, 0.25);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(213, 180, 116, 0.5);
+}
+
+/* Subtle atmospheric drift */
 @keyframes ambient-drift {
   0%,
   100% {
     transform: translate3d(-3%, -2%, 0) scale(1);
-    opacity: 0.5;
+    opacity: 0.48;
   }
   50% {
-    transform: translate3d(3%, 2%, 0) scale(1.08);
-    opacity: 0.78;
+    transform: translate3d(3%, 2%, 0) scale(1.07);
+    opacity: 0.74;
   }
 }
 
-/* Traveling specular pulse across the gold horizon line */
-@keyframes horizon-pulse {
-  0% {
-    transform: translateX(-140%);
-    opacity: 0;
-  }
-  15% {
-    opacity: 1;
-  }
-  85% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(260%);
-    opacity: 0;
-  }
-}
-
-/* Live telemetry dot pulse */
 @keyframes status-pulse {
   0%,
   100% {
@@ -86,40 +77,83 @@
   }
 }
 
-.animate-orbit-slow {
-  animation: orbit-slow 48s linear infinite;
+@keyframes scroll-line {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110%);
+    opacity: 0;
+  }
 }
 
-.animate-orbit-reverse {
-  animation: orbit-reverse 64s linear infinite;
+@keyframes horizon-pulse {
+  0% {
+    transform: translateX(-140%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(260%);
+    opacity: 0;
+  }
+}
+
+/* Subtle animated cinema grain */
+@keyframes grain-shift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-1.5%, 1%);
+  }
+  50% {
+    transform: translate(1%, -1.5%);
+  }
+  75% {
+    transform: translate(-1%, -1%);
+  }
 }
 
 .animate-ambient-drift {
   animation: ambient-drift 20s ease-in-out infinite;
 }
 
-.animate-horizon-pulse {
-  animation: horizon-pulse 3.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-}
-
 .animate-status-pulse {
   animation: status-pulse 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
-/* Fine 35mm cinema grain */
+.animate-scroll-line {
+  animation: scroll-line 2.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.animate-horizon-pulse {
+  animation: horizon-pulse 3.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
 .cinema-grain {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 180px 180px;
+  animation: grain-shift 1.4s steps(4) infinite;
 }
 
-/* Architectural metallic pearl-to-champagne display finish */
 .monolith-text {
   background: linear-gradient(
     180deg,
-    #ffffff 10%,
-    #f1eadb 62%,
-    #bba272 100%
+    #ffffff 8%,
+    #f5f0e6 58%,
+    #c6a360 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -127,11 +161,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-orbit-slow,
-  .animate-orbit-reverse,
   .animate-ambient-drift,
+  .animate-status-pulse,
+  .animate-scroll-line,
   .animate-horizon-pulse,
-  .animate-status-pulse {
+  .cinema-grain {
     animation: none !important;
   }
 }

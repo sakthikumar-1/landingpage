@@ -5,8 +5,8 @@ const EASE_CURTAIN = [0.76, 0, 0.24, 1];
 const EASE_CINEMATIC = [0.22, 1, 0.36, 1];
 
 /**
- * Futuristic launch-sequence preloader: tabular 00->100 telemetry counter,
- * laser horizon charge bar, and split-aperture curtain reveal.
+ * Animated preloader sequence: 000%->100% telemetry counter,
+ * horizon charge filament, and split-aperture curtain reveal.
  */
 export function Preloader({ isVisible, onComplete }) {
   const prefersReducedMotion = useReducedMotion();
@@ -26,7 +26,6 @@ export function Preloader({ isVisible, onComplete }) {
     const tick = (now) => {
       const elapsed = now - startTime;
       const t = Math.min(elapsed / durationMs, 1);
-      // Cubic ease-out for dramatic final approach to 100
       const eased = 1 - Math.pow(1 - t, 3);
       setProgress(Math.round(eased * 100));
 
@@ -48,7 +47,7 @@ export function Preloader({ isVisible, onComplete }) {
     return null;
   }
 
-  const formattedProgress = String(progress).padStart(2, '0');
+  const formattedProgress = String(progress).padStart(3, '0');
 
   return (
     <AnimatePresence>
@@ -59,7 +58,7 @@ export function Preloader({ isVisible, onComplete }) {
           initial={{ opacity: 1 }}
           exit={{ opacity: 1, transition: { duration: 0.8 } }}
         >
-          {/* Upper obsidian shutter */}
+          {/* Upper shutter */}
           <motion.div
             className="absolute inset-x-0 top-0 h-1/2 border-b border-[#D5B474]/15 bg-[#050505]"
             initial={{ y: '0%' }}
@@ -69,7 +68,7 @@ export function Preloader({ isVisible, onComplete }) {
             }}
           />
 
-          {/* Lower obsidian shutter */}
+          {/* Lower shutter */}
           <motion.div
             className="absolute inset-x-0 bottom-0 h-1/2 border-t border-[#D5B474]/15 bg-[#050505]"
             initial={{ y: '0%' }}
@@ -79,43 +78,48 @@ export function Preloader({ isVisible, onComplete }) {
             }}
           />
 
-          {/* Edge-to-edge laser flash on aperture open */}
+          {/* Center seam energy flash */}
           <motion.div
             className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-[#EFE0BC] to-transparent"
             initial={{ scaleX: 0, opacity: 0 }}
-            animate={{ scaleX: 0.25, opacity: 0.45 }}
+            animate={{ scaleX: 0.28, opacity: 0.4 }}
             exit={{
-              scaleX: 1.2,
+              scaleX: 1.15,
               opacity: 0,
-              transition: { duration: 0.6, ease: EASE_CINEMATIC },
+              transition: { duration: 0.55, ease: EASE_CINEMATIC },
             }}
             transition={{ duration: 0.9, ease: EASE_CINEMATIC }}
           />
 
-          {/* Telemetry counter & charge filament */}
+          {/* Counter & progress bar */}
           <motion.div
-            className="relative z-10 flex w-56 flex-col items-center gap-3 sm:w-64"
+            className="relative z-10 flex w-60 flex-col gap-3 sm:w-72"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{
               opacity: 0,
-              y: -8,
-              transition: { duration: 0.3, ease: EASE_CINEMATIC },
+              y: -10,
+              transition: { duration: 0.28, ease: EASE_CINEMATIC },
             }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.35 }}
           >
-            <div className="flex w-full items-baseline justify-between font-mono text-[10px] uppercase tracking-[0.26em] text-[#8F8A80]">
+            <div className="flex items-baseline justify-between font-mono text-[10px] uppercase tracking-[0.24em] text-[#969085]">
               <span>sakthikumar.com</span>
-              <span className="tabular-nums text-[#D5B474]">
+              <span className="text-xs tabular-nums text-[#D5B474]">
                 {formattedProgress}%
               </span>
             </div>
 
             <div className="relative h-px w-full overflow-hidden bg-white/10">
               <div
-                className="h-full origin-left bg-gradient-to-r from-[#D5B474]/50 via-[#EFE0BC] to-[#D5B474] transition-transform duration-75"
+                className="h-full origin-left bg-gradient-to-r from-[#D5B474]/40 via-[#EFE0BC] to-[#D5B474] transition-transform duration-75"
                 style={{ transform: `scaleX(${progress / 100})` }}
               />
+            </div>
+
+            <div className="flex items-center justify-between font-mono text-[9px] uppercase tracking-[0.26em] text-[#6E6961]">
+              <span>Preparing Entry</span>
+              <span>ED. 2026</span>
             </div>
           </motion.div>
         </motion.div>
