@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="12" fill="#050505"/>
+  <rect x="4.5" y="4.5" width="55" height="55" rx="9" stroke="#D5B474" stroke-opacity="0.35" stroke-width="1"/>
+  <path d="M12 14V10H16M48 10H52V14M52 50V54H48M16 54H12V50" stroke="#D5B474" stroke-opacity="0.75" stroke-width="1.25"/>
+  <text x="32" y="39" text-anchor="middle" fill="#D5B474" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-weight="400" letter-spacing="2">SK</text>
+</svg>
+

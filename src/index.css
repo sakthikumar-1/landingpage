@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-void: #050505;
+  --color-obsidian: #0c0b0a;
+  --color-pearl: #f4f0e6;
+  --color-stone: #9e978b;
+  --color-champagne: #d5b474;
+  --color-champagne-light: #efe0bc;
+}
+
+@layer base {
+  html,
+  body {
+    background-color: #050505;
+    color: #f4f0e6;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+}
+
+/* Subtle ambient atmospheric lighting drift */
+@keyframes ambient-drift {
+  0%,
+  100% {
+    transform: translate3d(-2%, -1%, 0) scale(1);
+    opacity: 0.56;
+  }
+  50% {
+    transform: translate3d(2%, 1.5%, 0) scale(1.06);
+    opacity: 0.8;
+  }
+}
+
+@keyframes ambient-counter-drift {
+  0%,
+  100% {
+    transform: translate3d(1.5%, 1%, 0) scale(1.04);
+    opacity: 0.34;
+  }
+  50% {
+    transform: translate3d(-1.5%, -1.5%, 0) scale(0.96);
+    opacity: 0.56;
+  }
+}
+
+/* Breathing stage eclipse behind central title */
+@keyframes stage-breathe {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.96);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+/* Traveling specular highlight across the champagne gold hairline */
+@keyframes gold-shimmer {
+  0% {
+    transform: translateX(-140%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.95;
+  }
+  80% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateX(240%);
+    opacity: 0;
+  }
+}
+
+/* Subtle status dot halo */
+@keyframes status-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.animate-ambient-drift {
+  animation: ambient-drift 18s ease-in-out infinite;
+}
+
+.animate-ambient-counter {
+  animation: ambient-counter-drift 22s ease-in-out infinite;
+}
+
+.animate-stage-breathe {
+  animation: stage-breathe 7.5s ease-in-out infinite;
+}
+
+.animate-gold-shimmer {
+  animation: gold-shimmer 4.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.animate-status-pulse {
+  animation: status-pulse 2.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+/* Fine 35mm cinema grain via inline SVG noise */
+.cinema-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+}
+
+/* Champagne-ivory metallic gradient applied per character span */
+.hero-letter-gradient {
+  background: linear-gradient(180deg, #fcfaf5 18%, #efe2c4 74%, #c6a15c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ambient-drift,
+  .animate-ambient-counter,
+  .animate-stage-breathe,
+  .animate-gold-shimmer,
+  .animate-status-pulse {
+    animation: none !important;
+  }
+}
