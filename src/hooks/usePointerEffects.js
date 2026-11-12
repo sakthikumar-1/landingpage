@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 /**
- * Provides GPU-composited cursor glow coordinates and subtle parallax motion values
- * for fine-pointer desktop devices, automatically disabled for touch or reduced-motion.
+ * Provides GPU-composited cursor spotlight coordinates and multi-depth parallax
+ * motion values on fine-pointer desktop devices, disabled for touch or reduced motion.
  */
 export function usePointerEffects() {
   const [isInteractive, setIsInteractive] = useState(false);
@@ -13,17 +13,19 @@ export function usePointerEffects() {
   const normX = useMotionValue(0);
   const normY = useMotionValue(0);
 
-  const glowX = useSpring(mouseX, { stiffness: 140, damping: 24, mass: 0.35 });
-  const glowY = useSpring(mouseY, { stiffness: 140, damping: 24, mass: 0.35 });
+  const glowX = useSpring(mouseX, { stiffness: 150, damping: 24, mass: 0.35 });
+  const glowY = useSpring(mouseY, { stiffness: 150, damping: 24, mass: 0.35 });
 
-  const smoothNormX = useSpring(normX, { stiffness: 80, damping: 22, mass: 0.5 });
-  const smoothNormY = useSpring(normY, { stiffness: 80, damping: 22, mass: 0.5 });
+  const smoothNormX = useSpring(normX, { stiffness: 75, damping: 22, mass: 0.55 });
+  const smoothNormY = useSpring(normY, { stiffness: 75, damping: 22, mass: 0.55 });
 
-  // Subtle depth layers for hero typography & framing
-  const heroX = useTransform(smoothNormX, [-1, 1], [-10, 10]);
-  const heroY = useTransform(smoothNormY, [-1, 1], [-7, 7]);
-  const frameX = useTransform(smoothNormX, [-1, 1], [5, -5]);
-  const frameY = useTransform(smoothNormY, [-1, 1], [4, -4]);
+  // Mid-ground orbital eclipse parallax
+  const eclipseX = useTransform(smoothNormX, [-1, 1], [16, -16]);
+  const eclipseY = useTransform(smoothNormY, [-1, 1], [12, -12]);
+
+  // Foreground typography subtle counter-parallax
+  const heroX = useTransform(smoothNormX, [-1, 1], [-8, 8]);
+  const heroY = useTransform(smoothNormY, [-1, 1], [-6, 6]);
 
   useEffect(() => {
     const pointerQuery = window.matchMedia('(pointer: fine)');
@@ -50,7 +52,6 @@ export function usePointerEffects() {
       return;
     }
 
-    // Initialize glow softly at viewport center until cursor moves
     mouseX.set(window.innerWidth / 2);
     mouseY.set(window.innerHeight / 2);
 
@@ -83,10 +84,9 @@ export function usePointerEffects() {
     isInteractive,
     glowX,
     glowY,
+    eclipseX,
+    eclipseY,
     heroX,
     heroY,
-    frameX,
-    frameY,
   };
 }
-
