@@ -186,6 +186,24 @@
   }
 }
 
+@keyframes marquee-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 @keyframes grain-shift {
   0%,
   100% {
@@ -224,6 +242,21 @@
 
 .animate-spin-reverse-slow {
   animation: spin-reverse-slow 34s linear infinite;
+}
+
+.animate-marquee-left {
+  animation: marquee-left 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 36s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-left:hover,
+.animate-marquee-right:hover {
+  animation-play-state: paused;
 }
 
 .cinema-grain {
@@ -266,6 +299,8 @@
   .animate-horizon-pulse,
   .animate-spin-slow,
   .animate-spin-reverse-slow,
+  .animate-marquee-left,
+  .animate-marquee-right,
   .cinema-grain {
     animation: none !important;
   }

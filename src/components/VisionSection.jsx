@@ -27,15 +27,31 @@ const PRINCIPLES = [
   },
 ];
 
+const ROW_ONE_ITEMS = [
+  'CLARITY',
+  'INTEGRITY',
+  'EVOLUTION',
+  'CLARITY',
+  'INTEGRITY',
+  'EVOLUTION',
+];
+
+const ROW_TWO_ITEMS = [
+  'MINDSET',
+  'CHARACTER',
+  'AMBITION',
+  'MINDSET',
+  'CHARACTER',
+  'AMBITION',
+];
+
 /**
- * Section 03 (Vision): Dual opposing scroll-scrubbed marquees,
- * continuously rotating orbital dial, and auto-cycling interactive principle stage.
+ * Section 03 (Vision): Continuous auto-moving kinetic marquee ticker,
+ * rotating orbital dial, and auto-cycling interactive principle stage.
  */
 export function VisionSection() {
   const prefersReducedMotion = useReducedMotion();
   const sectionRef = useRef(null);
-  const marqueeTopRef = useRef(null);
-  const marqueeBottomRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -52,36 +68,6 @@ export function VisionSection() {
     if (prefersReducedMotion || !sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        marqueeTopRef.current,
-        { xPercent: 8 },
-        {
-          xPercent: -16,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
-        }
-      );
-
-      gsap.fromTo(
-        marqueeBottomRef.current,
-        { xPercent: -12 },
-        {
-          xPercent: 10,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
-        }
-      );
-
       gsap.from('[data-vision-row]', {
         x: 42,
         opacity: 0,
@@ -108,46 +94,116 @@ export function VisionSection() {
       aria-labelledby="vision-heading"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      className="theme-surface relative z-20 overflow-hidden border-t border-[var(--border-subtle)] bg-[var(--bg-secondary)] px-5 py-24 sm:px-10 sm:py-36"
+      className="theme-surface relative z-20 overflow-hidden border-t border-[var(--border-subtle)] bg-[var(--bg-secondary)] px-5 py-20 sm:px-10 sm:py-32"
     >
       {/* Subtle depth lighting behind the marquee */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-20 left-1/2 h-72 w-3/4 -translate-x-1/2 rounded-full bg-[var(--accent-soft)] opacity-40 blur-[110px]"
+        className="pointer-events-none absolute -top-24 left-1/2 h-80 w-3/4 -translate-x-1/2 rounded-full bg-[var(--accent-soft)] opacity-40 blur-[120px]"
       />
 
-      {/* Dual opposing scroll-scrubbed kinetic marquees */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none select-none space-y-1 overflow-hidden"
-      >
-        <div
-          ref={marqueeTopRef}
-          className="vision-marquee-text whitespace-nowrap font-display text-[clamp(3.6rem,11vw,9.5rem)] font-extrabold uppercase leading-none tracking-[-0.04em]"
-        >
-          CLARITY · INTEGRITY · EVOLUTION · CLARITY · INTEGRITY ·
-        </div>
-        <div
-          ref={marqueeBottomRef}
-          className="vision-marquee-text whitespace-nowrap font-display text-[clamp(3.6rem,11vw,9.5rem)] font-extrabold uppercase leading-none tracking-[-0.04em]"
-        >
-          MINDSET · CHARACTER · AMBITION · MINDSET · CHARACTER ·
+      {/* Section Header / Eyebrow (cleanly above marquee) */}
+      <div className="mx-auto w-full max-w-[1440px] mb-8 sm:mb-12">
+        <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.26em] text-[var(--accent)]">
+          <span>03</span>
+          <span className="h-px w-8 bg-[var(--accent)]/50" />
+          <span>Vision</span>
         </div>
       </div>
 
-      <div className="relative mx-auto -mt-12 grid w-full max-w-[1440px] grid-cols-1 gap-14 sm:-mt-20 lg:grid-cols-12 lg:gap-16">
+      {/* Dual opposing continuous auto-moving marquee ticker (Cleanly ABOVE three principles) */}
+      <div
+        aria-hidden="true"
+        className="relative -mx-5 overflow-hidden select-none py-2 sm:-mx-10"
+      >
+        {/* Left edge fade gradient mask */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[var(--bg-secondary)] to-transparent sm:w-36" />
+        {/* Right edge fade gradient mask */}
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[var(--bg-secondary)] to-transparent sm:w-36" />
+
+        <div className="space-y-3 sm:space-y-4">
+          {/* Row 1: Moves Left smoothly and infinitely */}
+          <div className="flex w-max animate-marquee-left">
+            <div className="flex shrink-0 items-center gap-6 pr-6 sm:gap-10 sm:pr-10">
+              {ROW_ONE_ITEMS.map((item, idx) => (
+                <span
+                  key={`r1-a-${idx}`}
+                  className="inline-flex items-center gap-6 sm:gap-10"
+                >
+                  <span className="vision-marquee-text font-display text-[clamp(2.6rem,7.5vw,6rem)] font-extrabold uppercase leading-none tracking-[-0.03em]">
+                    {item}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="inline-block h-2 w-2 rounded-full bg-[var(--accent)]/60 sm:h-2.5 sm:w-2.5"
+                  />
+                </span>
+              ))}
+            </div>
+            <div className="flex shrink-0 items-center gap-6 pr-6 sm:gap-10 sm:pr-10">
+              {ROW_ONE_ITEMS.map((item, idx) => (
+                <span
+                  key={`r1-b-${idx}`}
+                  className="inline-flex items-center gap-6 sm:gap-10"
+                >
+                  <span className="vision-marquee-text font-display text-[clamp(2.6rem,7.5vw,6rem)] font-extrabold uppercase leading-none tracking-[-0.03em]">
+                    {item}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="inline-block h-2 w-2 rounded-full bg-[var(--accent)]/60 sm:h-2.5 sm:w-2.5"
+                  />
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2: Moves Right smoothly and infinitely */}
+          <div className="flex w-max animate-marquee-right">
+            <div className="flex shrink-0 items-center gap-6 pr-6 sm:gap-10 sm:pr-10">
+              {ROW_TWO_ITEMS.map((item, idx) => (
+                <span
+                  key={`r2-a-${idx}`}
+                  className="inline-flex items-center gap-6 sm:gap-10"
+                >
+                  <span className="vision-marquee-text font-display text-[clamp(2.6rem,7.5vw,6rem)] font-extrabold uppercase leading-none tracking-[-0.03em]">
+                    {item}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="inline-block h-2 w-2 rounded-full bg-[var(--accent)]/60 sm:h-2.5 sm:w-2.5"
+                  />
+                </span>
+              ))}
+            </div>
+            <div className="flex shrink-0 items-center gap-6 pr-6 sm:gap-10 sm:pr-10">
+              {ROW_TWO_ITEMS.map((item, idx) => (
+                <span
+                  key={`r2-b-${idx}`}
+                  className="inline-flex items-center gap-6 sm:gap-10"
+                >
+                  <span className="vision-marquee-text font-display text-[clamp(2.6rem,7.5vw,6rem)] font-extrabold uppercase leading-none tracking-[-0.03em]">
+                    {item}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="inline-block h-2 w-2 rounded-full bg-[var(--accent)]/60 sm:h-2.5 sm:w-2.5"
+                  />
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Content grid: Three principles. One direction. + Cards (Clean spacing below marquee) */}
+      <div className="relative mx-auto mt-14 grid w-full max-w-[1440px] grid-cols-1 gap-14 sm:mt-24 lg:grid-cols-12 lg:gap-16">
         {/* Left kinetic orbital dial */}
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-28">
-            <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.26em] text-[var(--accent)]">
-              <span>03</span>
-              <span className="h-px w-8 bg-[var(--accent)]/50" />
-              <span>Vision</span>
-            </div>
-
             <h2
               id="vision-heading"
-              className="mt-4 font-display text-3xl font-bold leading-[1.08] tracking-[-0.02em] text-[var(--text-primary)] sm:text-5xl"
+              className="font-display text-3xl font-bold leading-[1.08] tracking-[-0.02em] text-[var(--text-primary)] sm:text-5xl"
             >
               Three principles.{' '}
               <span className="text-[var(--accent)]">One direction.</span>
