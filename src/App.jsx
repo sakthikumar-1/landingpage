@@ -4,6 +4,7 @@ import { AboutSection } from './components/AboutSection';
 import { CinematicBackdrop } from './components/CinematicBackdrop';
 import { ContactSection } from './components/ContactSection';
 import { CustomCursor } from './components/CustomCursor';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { FooterBar } from './components/FooterBar';
 import { HeroSection } from './components/HeroSection';
 import { LaunchStatusSection } from './components/LaunchStatusSection';
@@ -90,11 +91,13 @@ function ExperienceShell() {
 
 export function App() {
   return (
-    <ThemeProvider>
-      <MotionConfig reducedMotion="user">
-        <ExperienceShell />
-      </MotionConfig>
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider>
+        <MotionConfig reducedMotion="user">
+          <ExperienceShell />
+        </MotionConfig>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }
 

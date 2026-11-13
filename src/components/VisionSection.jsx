@@ -108,8 +108,14 @@ export function VisionSection() {
       aria-labelledby="vision-heading"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      className="theme-surface relative z-20 overflow-hidden border-t border-[var(--border-subtle)] bg-[var(--bg-primary)] px-5 py-24 sm:px-10 sm:py-36"
+      className="theme-surface relative z-20 overflow-hidden border-t border-[var(--border-subtle)] bg-[var(--bg-secondary)] px-5 py-24 sm:px-10 sm:py-36"
     >
+      {/* Subtle depth lighting behind the marquee */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-20 left-1/2 h-72 w-3/4 -translate-x-1/2 rounded-full bg-[var(--accent-soft)] opacity-40 blur-[110px]"
+      />
+
       {/* Dual opposing scroll-scrubbed kinetic marquees */}
       <div
         aria-hidden="true"
@@ -117,15 +123,13 @@ export function VisionSection() {
       >
         <div
           ref={marqueeTopRef}
-          className="whitespace-nowrap font-display text-[clamp(3.6rem,11vw,9.5rem)] font-extrabold uppercase leading-none tracking-[-0.04em]"
-          style={{ color: 'var(--watermark-color)' }}
+          className="vision-marquee-text whitespace-nowrap font-display text-[clamp(3.6rem,11vw,9.5rem)] font-extrabold uppercase leading-none tracking-[-0.04em]"
         >
           CLARITY · INTEGRITY · EVOLUTION · CLARITY · INTEGRITY ·
         </div>
         <div
           ref={marqueeBottomRef}
-          className="whitespace-nowrap font-display text-[clamp(3.6rem,11vw,9.5rem)] font-extrabold uppercase leading-none tracking-[-0.04em]"
-          style={{ color: 'var(--watermark-color)' }}
+          className="vision-marquee-text whitespace-nowrap font-display text-[clamp(3.6rem,11vw,9.5rem)] font-extrabold uppercase leading-none tracking-[-0.04em]"
         >
           MINDSET · CHARACTER · AMBITION · MINDSET · CHARACTER ·
         </div>

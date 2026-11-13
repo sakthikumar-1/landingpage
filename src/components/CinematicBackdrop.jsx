@@ -17,8 +17,8 @@ export function CinematicBackdrop() {
         className="animate-ambient-drift absolute -top-[18%] left-1/2 h-[70vh] w-[92vw] max-w-[1200px] -translate-x-1/2 rounded-full blur-[120px]"
         style={{
           background: isDark
-            ? 'radial-gradient(ellipse at center, rgba(213, 180, 116, 0.095) 0%, rgba(158, 126, 68, 0.03) 48%, transparent 76%)'
-            : 'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.65) 0%, rgba(143, 109, 46, 0.08) 48%, transparent 76%)',
+            ? 'radial-gradient(ellipse at center, rgba(240, 196, 101, 0.12) 0%, rgba(190, 138, 34, 0.04) 50%, transparent 78%)'
+            : 'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.98) 0%, rgba(241, 243, 247, 0.82) 48%, rgba(179, 130, 34, 0.06) 72%, transparent 88%)',
         }}
       />
 
@@ -27,8 +27,8 @@ export function CinematicBackdrop() {
         className="absolute -bottom-[24%] right-[-10%] h-[58vh] w-[70vw] max-w-[900px] rounded-full blur-[130px]"
         style={{
           background: isDark
-            ? 'radial-gradient(circle, rgba(213, 180, 116, 0.05) 0%, rgba(16, 16, 20, 0.45) 55%, transparent 75%)'
-            : 'radial-gradient(circle, rgba(143, 109, 46, 0.09) 0%, rgba(190, 195, 204, 0.4) 55%, transparent 75%)',
+            ? 'radial-gradient(circle, rgba(240, 196, 101, 0.06) 0%, rgba(12, 12, 18, 0.65) 55%, transparent 75%)'
+            : 'radial-gradient(circle, rgba(179, 130, 34, 0.07) 0%, rgba(229, 232, 240, 0.6) 55%, transparent 75%)',
         }}
       />
 
@@ -37,8 +37,8 @@ export function CinematicBackdrop() {
         className="absolute inset-0"
         style={{
           background: isDark
-            ? 'radial-gradient(circle at 50% 45%, transparent 38%, rgba(2, 2, 2, 0.82) 100%)'
-            : 'radial-gradient(circle at 50% 45%, transparent 46%, rgba(186, 191, 200, 0.55) 100%)',
+            ? 'radial-gradient(circle at 50% 45%, transparent 38%, rgba(2, 2, 3, 0.88) 100%)'
+            : 'radial-gradient(circle at 50% 45%, transparent 50%, rgba(205, 210, 224, 0.45) 100%)',
         }}
       />
 

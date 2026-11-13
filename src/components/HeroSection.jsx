@@ -103,8 +103,8 @@ export function HeroSection({
         className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-500"
         style={{
           background: isDark
-            ? 'radial-gradient(ellipse 68% 42% at 50% 48%, rgba(5, 5, 5, 0.58) 0%, rgba(5, 5, 5, 0.25) 55%, transparent 100%)'
-            : 'radial-gradient(ellipse 68% 42% at 50% 48%, rgba(229, 231, 235, 0.72) 0%, rgba(229, 231, 235, 0.34) 55%, transparent 100%)',
+            ? 'radial-gradient(ellipse 65% 38% at 50% 48%, rgba(4, 4, 6, 0.40) 0%, rgba(4, 4, 6, 0.15) 55%, transparent 100%)'
+            : 'radial-gradient(ellipse 65% 38% at 50% 48%, rgba(241, 243, 247, 0.75) 0%, rgba(241, 243, 247, 0.28) 55%, transparent 100%)',
         }}
       />
 

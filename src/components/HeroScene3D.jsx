@@ -38,29 +38,29 @@ export default function HeroScene3D({ pointerRef, theme = 'dark' }) {
 
     const isDark = theme === 'dark';
     refs.isDark = isDark;
-    refs.scene.fog.color.setHex(isDark ? 0x050505 : 0xe5e7eb);
+    refs.scene.fog.color.setHex(isDark ? 0x040406 : 0xf1f3f7);
 
-    refs.baseColor.setHex(isDark ? 0xd5b474 : 0x8f6d2e);
-    refs.crestColor.setHex(isDark ? 0xfaf0da : 0x111317);
+    refs.baseColor.setHex(isDark ? 0xf0c465 : 0xb38222);
+    refs.crestColor.setHex(isDark ? 0xffffff : 0x0d0f15);
 
     refs.waveMat.blending = isDark ? THREE.AdditiveBlending : THREE.NormalBlending;
-    refs.waveMat.opacity = isDark ? 0.86 : 0.68;
+    refs.waveMat.opacity = isDark ? 0.96 : 0.82;
     refs.waveMat.needsUpdate = true;
 
-    refs.outerMat.color.setHex(isDark ? 0xd5b474 : 0x6b5120);
-    refs.outerMat.opacity = isDark ? 0.18 : 0.24;
+    refs.outerMat.color.setHex(isDark ? 0xf0c465 : 0x7c5609);
+    refs.outerMat.opacity = isDark ? 0.52 : 0.32;
 
-    refs.haloMat.color.setHex(isDark ? 0xd5b474 : 0x8f6d2e);
-    refs.haloMat.opacity = isDark ? 0.28 : 0.34;
+    refs.haloMat.color.setHex(isDark ? 0xf0c465 : 0xb38222);
+    refs.haloMat.opacity = isDark ? 0.68 : 0.45;
 
-    refs.haloTwoMat.color.setHex(isDark ? 0xefe0bc : 0x434750);
-    refs.haloTwoMat.opacity = isDark ? 0.16 : 0.22;
+    refs.haloTwoMat.color.setHex(isDark ? 0xffe599 : 0x475569);
+    refs.haloTwoMat.opacity = isDark ? 0.46 : 0.30;
 
-    refs.nodeMat.color.setHex(isDark ? 0xefe0bc : 0x6b5120);
+    refs.nodeMat.color.setHex(isDark ? 0xffffff : 0x7c5609);
 
-    refs.starMat.color.setHex(isDark ? 0xefe0bc : 0x5f6570);
+    refs.starMat.color.setHex(isDark ? 0xffe599 : 0x64748b);
     refs.starMat.blending = isDark ? THREE.AdditiveBlending : THREE.NormalBlending;
-    refs.starMat.opacity = isDark ? 0.52 : 0.4;
+    refs.starMat.opacity = isDark ? 0.78 : 0.50;
     refs.starMat.needsUpdate = true;
 
     if (refs.renderSingleFrame) {
@@ -97,7 +97,7 @@ export default function HeroScene3D({ pointerRef, theme = 'dark' }) {
     container.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(isDarkInit ? 0x050505 : 0xe5e7eb, 0.105);
+    scene.fog = new THREE.FogExp2(isDarkInit ? 0x040406 : 0xf1f3f7, 0.045);
 
     const camera = new THREE.PerspectiveCamera(
       48,
@@ -119,8 +119,8 @@ export default function HeroScene3D({ pointerRef, theme = 'dark' }) {
 
     const wavePositions = new Float32Array(waveCount * 3);
     const waveColors = new Float32Array(waveCount * 3);
-    const baseColor = new THREE.Color(isDarkInit ? 0xd5b474 : 0x8f6d2e);
-    const crestColor = new THREE.Color(isDarkInit ? 0xfaf0da : 0x111317);
+    const baseColor = new THREE.Color(isDarkInit ? 0xf0c465 : 0xb38222);
+    const crestColor = new THREE.Color(isDarkInit ? 0xffffff : 0x0d0f15);
 
     let idx = 0;
     for (let ix = 0; ix < cols; ix++) {
@@ -149,7 +149,7 @@ export default function HeroScene3D({ pointerRef, theme = 'dark' }) {
       map: particleTexture,
       vertexColors: true,
       transparent: true,
-      opacity: isDarkInit ? 0.86 : 0.68,
+      opacity: isDarkInit ? 0.96 : 0.82,
       depthWrite: false,
       blending: isDarkInit ? THREE.AdditiveBlending : THREE.NormalBlending,
     });
@@ -166,9 +166,9 @@ export default function HeroScene3D({ pointerRef, theme = 'dark' }) {
     const outerGeo = new THREE.IcosahedronGeometry(2.8, 1);
     const outerEdges = new THREE.EdgesGeometry(outerGeo);
     const outerMat = new THREE.LineBasicMaterial({
-      color: isDarkInit ? 0xd5b474 : 0x6b5120,
+      color: isDarkInit ? 0xf0c465 : 0x7c5609,
       transparent: true,
-      opacity: isDarkInit ? 0.18 : 0.24,
+      opacity: isDarkInit ? 0.52 : 0.32,
     });
     const outerWire = new THREE.LineSegments(outerEdges, outerMat);
     crownGroup.add(outerWire);
@@ -180,9 +180,9 @@ export default function HeroScene3D({ pointerRef, theme = 'dark' }) {
       isMobile ? 72 : 120
     );
     const haloMat = new THREE.MeshBasicMaterial({
-      color: isDarkInit ? 0xd5b474 : 0x8f6d2e,
+      color: isDarkInit ? 0xf0c465 : 0xb38222,
       transparent: true,
-      opacity: isDarkInit ? 0.28 : 0.34,
+      opacity: isDarkInit ? 0.68 : 0.45,
     });
     const haloRing = new THREE.Mesh(haloGeo, haloMat);
     haloRing.rotation.set(Math.PI * 0.4, 0.22, 0);
@@ -195,9 +195,9 @@ export default function HeroScene3D({ pointerRef, theme = 'dark' }) {
       isMobile ? 72 : 120
     );
     const haloTwoMat = new THREE.MeshBasicMaterial({
-      color: isDarkInit ? 0xefe0bc : 0x434750,
+      color: isDarkInit ? 0xffe599 : 0x475569,
       transparent: true,
-      opacity: isDarkInit ? 0.16 : 0.22,
+      opacity: isDarkInit ? 0.46 : 0.30,
     });
     const haloRingTwo = new THREE.Mesh(haloTwoGeo, haloTwoMat);
     haloRingTwo.rotation.set(-Math.PI * 0.35, -0.3, 0);
@@ -206,7 +206,7 @@ export default function HeroScene3D({ pointerRef, theme = 'dark' }) {
     // Traveling orbital light nodes on ring one
     const nodeGeo = new THREE.SphereGeometry(0.055, 10, 10);
     const nodeMat = new THREE.MeshBasicMaterial({
-      color: isDarkInit ? 0xefe0bc : 0x6b5120,
+      color: isDarkInit ? 0xffffff : 0x7c5609,
     });
     const orbitalNodes = [0, Math.PI * 0.5, Math.PI, Math.PI * 1.5].map(
       (phase) => {
@@ -234,9 +234,9 @@ export default function HeroScene3D({ pointerRef, theme = 'dark' }) {
     const starMat = new THREE.PointsMaterial({
       size: 0.068,
       map: particleTexture,
-      color: isDarkInit ? 0xefe0bc : 0x5f6570,
+      color: isDarkInit ? 0xffe599 : 0x64748b,
       transparent: true,
-      opacity: isDarkInit ? 0.52 : 0.4,
+      opacity: isDarkInit ? 0.78 : 0.50,
       depthWrite: false,
       blending: isDarkInit ? THREE.AdditiveBlending : THREE.NormalBlending,
     });
@@ -403,7 +403,7 @@ export default function HeroScene3D({ pointerRef, theme = 'dark' }) {
       particleTexture?.dispose();
       renderer.dispose();
 
-      if (renderer.domElement.parentNode === container) {
+      if (renderer?.domElement && container && renderer.domElement.parentNode === container) {
         container.removeChild(renderer.domElement);
       }
     };
